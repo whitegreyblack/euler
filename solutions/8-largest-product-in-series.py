@@ -71,12 +71,11 @@ series_number = int(series_single)
 remainder = len(series_single) % adjacent_len
 max_idx = len(series_single) - remainder
 
-print(remainder, max_idx)
-print(len(series_single))
-print(series_single)
-print(series_single[adjacent_len:adjacent_len+1])
-
+# separate all subsets of {{adjacent_len}}
 for i in range(max_idx):
-    # casting removes leading zeroes so sorted ordering will work
-    subsets.append(product(series_single[i:i+adjacent_len+1]))
-print(sorted(subsets, key=lambda x: x[1], reverse=True)[0:5])
+    subset = series_single[i:i+adjacent_len]
+    assert len(subset) == adjacent_len
+    subsets.append(product(subset))
+
+# get the largest value in the computed series
+print(sorted(subsets, key=lambda x: x[1], reverse=True)[0])
