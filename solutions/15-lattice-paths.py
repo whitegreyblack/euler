@@ -74,20 +74,42 @@ Imagine the grid as a graph
          |  |  |  |  |  |
          SE SE SE SE SE SE
 """
-size = 20
-grid = [[1 if i == size or j == size else 0 
-          for i in range(size+1)] 
-            for j in range(size+1)]
-
-for j in range(size-1, -1, -1):
-    for i in range(size-1, -1, -1):
-        grid[j][i] = grid[j+1][i] + grid[j][i+1]
-
-for j in grid:
-  print(j)
 
 import operator as op
 import functools as fn
-print(fn.reduce(op.mul, range(1, 22), 1))
-print(fn.reduce(op.mul, range(1, 22), 1)//20)
-print(list(range(1, 22)))
+import click
+
+
+def bottom_edge(size, x, y) -> int:
+    return int(x == size or y == size)
+
+def build_grid(size:int) -> list:
+    return [[bottom_edge(size, i, j) for i in range(size+1)] for j in range(size+1)]
+
+def populate_grid(grid:list) -> None:
+    size = len(grid) - 1
+    for j in range(size-1, -1, -1):
+        for i in range(size-1, -1, -1):
+            try:
+                grid[j][i] = grid[j+1][i] + grid[j][i+1]
+            except:
+                print(i, j)
+                raise
+
+def count_paths(grid:list) -> int:
+    return grid[0][0]
+
+def print_grid(grid:list) -> None:
+    for g in grid:
+        print(g)
+
+@click.command()
+@click.argument('size', nargs=1)
+def main(size):
+    grid = build_grid(int(size))
+    populate_grid(grid)
+    print_grid(grid)
+    print(count_paths(grid))
+
+if __name__ == "__main__":
+    main()
