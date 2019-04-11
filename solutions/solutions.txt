@@ -19,5 +19,8 @@
 16 |   yes
 17 |    no <--- numbers to letters (mismatch in how to spell out certain words?)
 18 |   yes <--- dynamic programming
-19 |
-20 |
+19 |    no
+20 |   yes
+21 |   yes
+22 |   yes
+23 | 
