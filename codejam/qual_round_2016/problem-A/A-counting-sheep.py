@@ -78,4 +78,3 @@ num_lines = input()
 for case in range(1, int(num_lines) + 1):
     value = int(input())
     print(format_output(case, value))
-"""
