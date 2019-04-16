@@ -53,24 +53,43 @@ for i in range(1, 10000):
     for j in range(1000 // i, 9999 // i + 1):
         if '0' in list(str(j)):
             continue
-        if set([i, j]) in pairs:
+        if (i, j) in pairs:
             continue
         product = i * j
         if '0' in list(str(product)):
             continue
-        """
-        smaller_than_i = len(str(product)) < len(str(i))
-        smaller_than_j = len(str(product)) < len(str(j))
-        if smaller_than_i or smaller_than_j:
-            break
-        """
         if len(str(i)) + len(str(j)) + len(str(product)) == 9:
             if pandigital_product(i, j, product):
-                print(i, j, product)
+                print(i, j, product, ''.join(sorted(str(i) + str(j) + str(product))))
                 pairs.add((i, j))
-
+                pairs.add((j, i))
                 sums.append(product)
+print(sums)
 print(sum(sums))
 # print(pandigital(15234))
 # print(pandigital(155234))
-    
+# answer - 45228 
+
+products = set()
+digit_check = set('123456789')
+for i in range(9):
+    for j in range(999, 9999):
+        product = i * j
+        s = str(i) + str(j) + str(product)
+        if len(s) == 9 and set(s) == digit_check:
+            print(i, j, product)
+            products.add(product)
+        elif len(s) > 9:
+            break
+
+for i in range(0, 99):
+    for j in range(99, 999):
+        product = i * j
+        s = str(i) + str(j) + str(product)
+        if len(s) == 9 and set(s) == digit_check:
+            print(i, j, product)
+            products.add(product)
+        elif len(s) > 9:
+            break
+print(products)
+print(sum(products))
