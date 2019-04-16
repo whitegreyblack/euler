@@ -21,7 +21,7 @@ def digit_powers(number, power=5):
     return s == number
 
 s = 0
-for i in range(2, 1_000_000):
+for i in range(2, 1000_000):
     if digit_powers(i):
         s += i
 print(s)
