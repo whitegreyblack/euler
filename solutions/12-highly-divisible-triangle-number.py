@@ -18,24 +18,32 @@ We can see that 28 is the first triangle number to have over five divisors.
 
 What is the value of the first triangle number to have over five hundred divisors?
 """
+import math
+import functools as fn
+fs_cache = {}
+def factors(x):
+    divisors = []
+    for i in range(1, int(x**0.5) + 1):
+        if x % i == 0:
+            divisors.append([i, x // i])
+    return set(fn.reduce(list.__add__, divisors))
+nn_cache = {}    
+def natural_numbers(x): # x is the index
+    if x not in nn_cache:
+        if x == 0:
+            nn_cache[x] = x
+        else:
+            nn_cache[x] = x + natural_numbers(x-1)
+    return nn_cache[x]
+max_fs = 500
+x = 1
+nat = natural_numbers(x)
+fs = list(factors(nat))
+l = len(fs)
+while l < max_fs:
+    x += 1
+    nat = natural_numbers(x)
+    fs = list(factors(nat))
+    l = len(fs)
+print(nat)
 
-def summation(x):
-    return sum(i+1 for i in range(x))
-
-def number_of_factors(x):
-    count = 1
-    for factor in range(x//2, 2, -1):
-        if x % factor == 0:
-            print(factor)
-            count += 1
-    return count
-for i in range(1, 11):
-    x = summation(i)
-    print(x, number_of_factors(x))
-x = 8
-# factors = number_of_factors(summation(x))
-# while factors < 500:
-#     x += 1
-#     factors = number_of_factors(summation(x))
-# print(x)
-print(number_of_factors(summation(1001001)))
