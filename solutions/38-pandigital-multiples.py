@@ -23,27 +23,6 @@ Second largest x = 999_999_999 // 398_765_421
 """
 def is_pandigital(x):
     return set(x) == set('123456789')
-def is_concatenated_product_pandigital(x):
-    products = []
-    n = 1
-    break_loop = False
-    while not break_loop:
-        s = ''
-        for i in range(1, n+1):
-            s += str(x * i)
-            if len(s) > 9:
-                break_loop = True
-                break
-        if len(s) < 9:
-            i += 1
-            continue
-        if is_pandigital(s):
-            products = (x, i, int(s))
-def check_concatenated_product_pandigital(x, n):
-    s = ''
-    for i in range(1, n+1):
-        s += str(x * i)
-    return s
 def find_cpp(x):
     products = []
     n = 1
@@ -57,30 +36,16 @@ def find_cpp(x):
         elif len(s) == 9:
             p = is_pandigital(s)
             if p:
-                products.append((x, i, int(s), p))
+                products.append(int(s))
             loop_should_continue = False
         n += 1
     return products
 products = []
 limit = 398_765_421
+limit = 1_000_000
 # limit = 192
-for i in range(1, limit+1):
-    print(i)
+for i in range(3, limit+1, 3):
     p = find_cpp(i)
     if p:
         products += p
-print(products[0])
-for i in sorted(products, key=lambda x: x[2]):
-    print(i)
-"""
-x = 9
-n = 5
-s = check_concatenated_product_pandigital(x, n)
-p = is_pandigital(s)
-print(x, n, s, p)
-x, n = 192, 3
-s = check_concatenated_product_pandigital(x, n)
-p = is_pandigital(s)
-print(x, n, s, p)
-"""
-# print(is_concatenated_product_pandigital(9))
+print(sorted(products, key=lambda x: x[2]))
