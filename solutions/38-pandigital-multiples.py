@@ -41,11 +41,11 @@ def find_cpp(x):
         n += 1
     return products
 products = []
-limit = 398_765_421
 limit = 1_000_000
 # limit = 192
 for i in range(3, limit+1, 3):
     p = find_cpp(i)
     if p:
         products += p
-print(sorted(products, key=lambda x: x[2]))
+print(sorted(products)[-1])
+
