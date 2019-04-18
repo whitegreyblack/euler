@@ -7,10 +7,9 @@ also prime.
 
 What is the largest n-digit pandigital prime that exists?
 """
-def is_pandigital(x):
-    x = str(x)
-    l = len(x) == len(set(x)) # make sure the no duplicates exist
-    p = set(x) == set(''.join(str(i) for i in range(1, len(x)+1)))
-    return l and p
-print(is_pandigital(123))
-print(is_pandigital(1123))
+from lib import primes_under, is_pandigital
+:w
+for x in primes_under(100_000_000):
+    if is_pandigital(x):
+        print(x)
+
