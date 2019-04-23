@@ -34,18 +34,20 @@ def count2(S, n):
             table[j] += table[j - S[i]]
         print(f'Table is now {table}')
     return table[n]
-"""
-S = 1, 2, 3
-base = [1, 0, 0, 0, 0] # len(n+1), n=4, len(base) = 5
-for i in range(3):
-    for j in range((1, 4), (2, 4), (3, 4)):
-        pass     
-"""
+
+def count_coins(coins, value):
+    table = [0 for _ in range(value + 1)]
+    table[0] = 1
+    for coin_val in coins:
+        for i in range(coin_val, value + 1):
+            table[i] += table[i - coin_val]
+    return table[value]
+
 arr = [1, 2, 3]
-n = 2
-print(count2(arr, n))
+n = 10
+print(count_coins(arr, n))
 
 arr = [1, 2, 5, 10, 20, 50, 100, 200]
 n = 200
-# print(count2(arr, len(arr), n))
+print(count_coins(arr, n))
 
